@@ -26,6 +26,8 @@ import { FIELD_NAMES, FIELD_TYPES } from "@/constants";
 import FileUpload from "@/components/FileUpload";
 import { toast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { Eye, EyeOff } from "lucide-react";
 
 interface Props<T extends FieldValues> {
   schema: ZodType<T>;
@@ -48,6 +50,9 @@ const AuthForm = <T extends FieldValues>({
     resolver: zodResolver(schema),
     defaultValues: defaultValues as DefaultValues<T>,
   });
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const handleSubmit: SubmitHandler<T> = async (data) => {
     const result = await onSubmit(data);
@@ -105,6 +110,46 @@ const AuthForm = <T extends FieldValues>({
                         variant="light"
                         onFileChange={field.onChange}
                       />
+                    ) : field.name === "password" ? (
+                      <div className="relative">
+                        <Input
+                          required
+                          type={showPassword ? "text" : "password"}
+                          {...field}
+                          className="form-input pr-12"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setShowPassword(!showPassword)}
+                          className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                        >
+                          {showPassword ? (
+                            <EyeOff size={20} />
+                          ) : (
+                            <Eye size={20} />
+                          )}
+                        </button>
+                      </div>
+                    ) : field.name === "confirmPassword" ? (
+                      <div className="relative">
+                        <Input
+                          required
+                          type={showConfirmPassword ? "text" : "password"}
+                          {...field}
+                          className="form-input pr-12"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                          className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                        >
+                          {showConfirmPassword ? (
+                            <EyeOff size={20} />
+                          ) : (
+                            <Eye size={20} />
+                          )}
+                        </button>
+                      </div>
                     ) : (
                       <Input
                         required
