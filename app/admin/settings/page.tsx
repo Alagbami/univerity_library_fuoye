@@ -24,8 +24,8 @@ const Page = () => {
               </Label>
               <Input
                 type="text"
-                placeholder="University Library"
-                defaultValue="FUOYE University Library"
+                placeholder="FUOYE Library"
+                defaultValue="Federal University Oye-Ekiti Library System"
                 className="w-full"
               />
             </div>
@@ -36,7 +36,8 @@ const Page = () => {
               </Label>
               <Input
                 type="email"
-                placeholder="admin@library.edu"
+                placeholder="library@fuoye.edu.ng"
+                defaultValue="library@fuoye.edu.ng"
                 className="w-full"
               />
             </div>
@@ -48,6 +49,7 @@ const Page = () => {
               <Input
                 type="tel"
                 placeholder="+234 123 456 7890"
+                defaultValue="+234 (0) 123 456 7890"
                 className="w-full"
               />
             </div>
@@ -57,7 +59,8 @@ const Page = () => {
                 Address
               </Label>
               <Textarea
-                placeholder="123 University Ave, City, Country"
+                placeholder="Oye-Ekiti, Ekiti State, Nigeria"
+                defaultValue="Federal University Oye-Ekiti, Oye-Ekiti, Ekiti State, Nigeria"
                 className="w-full"
                 rows={3}
               />

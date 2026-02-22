@@ -72,10 +72,10 @@ const AuthForm = <T extends FieldValues>({
 
   return (
     <div className="flex flex-col gap-4">
-      <h1 className="text-2xl font-semibold text-white">
-        {isSignIn ? "Welcome back to BookWise" : "Create your library account"}
+      <h1 className="text-2xl font-semibold text-dark-400">
+        {isSignIn ? "Welcome back to FUOYE Library" : "Create your FUOYE Library account"}
       </h1>
-      <p className="text-light-100">
+      <p className="text-gray-600">
         {isSignIn
           ? "Access the vast collection of resources, and stay updated"
           : "Please complete all fields and upload a valid university ID to gain access to the library"}
@@ -102,7 +102,7 @@ const AuthForm = <T extends FieldValues>({
                         accept="image/*"
                         placeholder="Upload your ID"
                         folder="ids"
-                        variant="dark"
+                        variant="light"
                         onFileChange={field.onChange}
                       />
                     ) : (
@@ -129,7 +129,7 @@ const AuthForm = <T extends FieldValues>({
       </Form>
 
       <p className="text-center text-base font-medium">
-        {isSignIn ? "New to BookWise? " : "Already have an account? "}
+        {isSignIn ? "New to FUOYE Library? " : "Already have an account? "}
 
         <Link
           href={isSignIn ? "/sign-up" : "/sign-in"}

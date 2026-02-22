@@ -24,9 +24,9 @@ const bebasNeue = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "BookWise",
+  title: "FUOYE Library Management System",
   description:
-    "BookWise is a book borrowing university library management solution.",
+    "Federal University Oye-Ekiti Library Management System - Book borrowing and library management solution.",
 };
 
 const RootLayout = async ({ children }: { children: ReactNode }) => {
