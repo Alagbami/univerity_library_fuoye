@@ -29,14 +29,19 @@ export const adminSideBarLinks = [
     text: "All Books",
   },
   {
+    img: "/icons/admin/borrow.svg",
+    route: "/admin/borrows",
+    text: "Borrow Books",
+  },
+  {
     img: "/icons/admin/bookmark.svg",
-    route: "/admin/book-requests",
-    text: "Borrow Requests",
+    route: "/admin/analytics",
+    text: "Analytics",
   },
   {
     img: "/icons/admin/user.svg",
-    route: "/admin/account-requests",
-    text: "Account Requests",
+    route: "/admin/settings",
+    text: "Settings",
   },
 ];
 
