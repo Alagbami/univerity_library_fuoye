@@ -1,16 +1,22 @@
 "use client";
-import React from "react";
-import { IKVideo, ImageKitProvider } from "imagekitio-next";
-import config from "@/lib/config";
+import React, { useEffect, useState } from "react";
 
 const BookVideo = ({ videoUrl }: { videoUrl: string }) => {
+  const [signedUrl, setSignedUrl] = useState("");
+
+  useEffect(() => {
+    fetch(`/api/imagekit/signed-url?path=${encodeURIComponent(videoUrl)}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.signedUrl) {
+          setSignedUrl(data.signedUrl);
+        }
+      })
+      .catch((err) => console.error("Error fetching signed URL:", err));
+  }, [videoUrl]);
+
   return (
-    <ImageKitProvider
-      publicKey={config.env.imagekit.publicKey}
-      urlEndpoint={config.env.imagekit.urlEndpoint}
-    >
-      <IKVideo path={videoUrl} controls={true} className="w-full rounded-xl" />
-    </ImageKitProvider>
+    <video controls className="w-full rounded-xl" src={signedUrl} />
   );
 };
 export default BookVideo;

@@ -59,6 +59,22 @@ export const signUp = async (params: AuthCredentials) => {
 
   const hashedPassword = await hash(password, 10);
 
+  // ensure university_id column type is text (runtime migration)
+  try {
+    await db.execute(`
+      DO $$
+      BEGIN
+        IF (SELECT data_type FROM information_schema.columns
+            WHERE table_name='users' AND column_name='university_id') = 'integer' THEN
+          ALTER TABLE users ALTER COLUMN university_id TYPE text;
+        END IF;
+      END
+      $$;
+    `);
+  } catch (err) {
+    console.error("Runtime migration failed", err);
+  }
+
   try {
     await db.insert(users).values({
       fullName,

@@ -3,7 +3,9 @@ import { z } from "zod";
 export const signUpSchema = z.object({
   fullName: z.string().min(3),
   email: z.string().email(),
-  universityId: z.coerce.number(),
+  universityId: z
+    .string()
+    .regex(/^[A-Z]{3}\/([A-Z]{3})\/\d{2}\/\d{7}$/, "Invalid format (e.g. FTP/CSC/25/0134513)"),
   universityCard: z.string().nonempty("University Card is required"),
   password: z.string().min(8),
 });

@@ -150,6 +150,15 @@ const AuthForm = <T extends FieldValues>({
                           )}
                         </button>
                       </div>
+                    ) : field.name === "universityId" ? (
+                      <Input
+                        required
+                        type="text"
+                        pattern="[A-Z]{3}\/[A-Z]{3}\/[0-9]{2}\/[0-9]{7}"
+                        placeholder="FTP/CSC/25/0134513"
+                        {...field}
+                        className="form-input"
+                      />
                     ) : (
                       <Input
                         required

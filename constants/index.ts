@@ -29,7 +29,7 @@ export const adminSideBarLinks = [
     text: "All Books",
   },
   {
-    img: "/icons/admin/borrow.svg",
+    img: "/icons/admin/book.svg",
     route: "/admin/borrows",
     text: "Borrow Books",
   },
@@ -56,7 +56,7 @@ export const FIELD_NAMES = {
 export const FIELD_TYPES = {
   fullName: "text",
   email: "email",
-  universityId: "number",
+  universityId: "text",
   password: "password",
 };
 

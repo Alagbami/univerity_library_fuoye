@@ -4,7 +4,7 @@ import React from "react";
 import { db } from "@/database/drizzle";
 import { borrowRecords, users, books } from "@/database/schema";
 import { Button } from "@/components/ui/button";
-import { CheckCircle, XCircle } from "lucide-react";
+import BorrowActions from "@/components/admin/BorrowActions";
 import { desc, eq } from "drizzle-orm";
 
 const Page = async () => {
@@ -181,29 +181,7 @@ const Page = async () => {
                       </span>
                     </td>
                     <td className="px-4 py-3 text-sm">
-                      {borrow.status === "BORROWED" && (
-                        <div className="flex gap-2">
-                          <Button
-                            size="sm"
-                            variant="outline"
-                            className="flex gap-1 bg-green-50"
-                          >
-                            <CheckCircle size={16} />
-                            Mark Returned
-                          </Button>
-                          <Button
-                            size="sm"
-                            variant="destructive"
-                            className="flex gap-1"
-                          >
-                            <XCircle size={16} />
-                            Reject
-                          </Button>
-                        </div>
-                      )}
-                      {borrow.status === "RETURNED" && (
-                        <span className="text-xs text-gray-500">Completed</span>
-                      )}
+                      <BorrowActions borrowId={borrow.id} status={borrow.status} />
                     </td>
                   </tr>
                 );

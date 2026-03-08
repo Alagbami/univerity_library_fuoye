@@ -84,9 +84,9 @@ const Page = async () => {
             <p className="text-gray-600">{userProfile?.email}</p>
           </div>
         </div>
-        <form action={handleLogout}>
+        {/* <form action={handleLogout}>
           <Button variant="destructive">Logout</Button>
-        </form>
+        </form> */}
       </div>
 
       {/* Profile Details Card */}

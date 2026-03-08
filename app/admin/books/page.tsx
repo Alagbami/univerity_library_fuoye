@@ -5,8 +5,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { db } from "@/database/drizzle";
 import { books } from "@/database/schema";
-import { Trash2, SquarePen } from "lucide-react";
-import Image from "next/image";
+import BookActions from "@/components/admin/BookActions";
 
 const Page = async () => {
   const allBooks = await db.select().from(books);
@@ -79,26 +78,7 @@ const Page = async () => {
                     {book.rating}★
                   </td>
                   <td className="px-4 py-3 text-sm">
-                    <div className="flex gap-2">
-                      <Link href={`/admin/books/${book.id}`}>
-                        <Button
-                          size="sm"
-                          variant="outline"
-                          className="flex gap-1"
-                        >
-                          <SquarePen size={16} />
-                          Edit
-                        </Button>
-                      </Link>
-                      <Button
-                        size="sm"
-                        variant="destructive"
-                        className="flex gap-1"
-                      >
-                        <Trash2 size={16} />
-                        Delete
-                      </Button>
-                    </div>
+                    <BookActions bookId={book.id} />
                   </td>
                 </tr>
               ))}

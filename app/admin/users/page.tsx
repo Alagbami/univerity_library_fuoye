@@ -4,7 +4,7 @@ import React from "react";
 import { db } from "@/database/drizzle";
 import { users } from "@/database/schema";
 import { Button } from "@/components/ui/button";
-import { Trash2, CheckCircle, XCircle } from "lucide-react";
+import UserActions from "@/components/admin/UserActions";
 
 const Page = async () => {
   const allUsers = await db.select().from(users);
@@ -61,15 +61,14 @@ const Page = async () => {
             </thead>
             <tbody>
               {allUsers.map((user) => {
-                const statusInfo = statusMap[user.status];
-                const joinDate = new Date(user.createdAt).toLocaleDateString(
-                  "en-US",
-                  {
-                    year: "numeric",
-                    month: "short",
-                    day: "numeric",
-                  }
-                );
+                const statusInfo = statusMap[user.status ?? "PENDING"];
+                const joinDate = user.createdAt
+                  ? new Date(user.createdAt).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "short",
+                      day: "numeric",
+                    })
+                  : "—";
 
                 return (
                   <tr
@@ -87,7 +86,7 @@ const Page = async () => {
                     </td>
                     <td className="px-4 py-3 text-sm text-gray-700">
                       <span className="font-medium">
-                        {roleMap[user.role]}
+                        {roleMap[user.role ?? "USER"]}
                       </span>
                     </td>
                     <td className="px-4 py-3 text-sm">
@@ -102,34 +101,7 @@ const Page = async () => {
                     </td>
                     <td className="px-4 py-3 text-sm">
                       <div className="flex gap-2">
-                        {user.status === "PENDING" && (
-                          <>
-                            <Button
-                              size="sm"
-                              variant="outline"
-                              className="flex gap-1 bg-green-50"
-                            >
-                              <CheckCircle size={16} />
-                              Approve
-                            </Button>
-                            <Button
-                              size="sm"
-                              variant="destructive"
-                              className="flex gap-1"
-                            >
-                              <XCircle size={16} />
-                              Reject
-                            </Button>
-                          </>
-                        )}
-                        <Button
-                          size="sm"
-                          variant="destructive"
-                          className="flex gap-1"
-                        >
-                          <Trash2 size={16} />
-                          Delete
-                        </Button>
+                        <UserActions userId={user.id!} status={user.status!} />
                       </div>
                     </td>
                   </tr>
