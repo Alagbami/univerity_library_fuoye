@@ -5,6 +5,7 @@ import { db } from "@/database/drizzle";
 import { users } from "@/database/schema";
 import { Button } from "@/components/ui/button";
 import UserActions from "@/components/admin/UserActions";
+import RoleSelector from "@/components/admin/RoleSelector";
 
 const Page = async () => {
   const allUsers = await db.select().from(users);
@@ -85,9 +86,7 @@ const Page = async () => {
                       {user.universityId}
                     </td>
                     <td className="px-4 py-3 text-sm text-gray-700">
-                      <span className="font-medium">
-                        {roleMap[user.role ?? "USER"]}
-                      </span>
+                      <RoleSelector userId={user.id!} currentRole={user.role ?? "USER"} />
                     </td>
                     <td className="px-4 py-3 text-sm">
                       <span

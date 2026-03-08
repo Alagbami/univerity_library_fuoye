@@ -46,3 +46,16 @@ export const deleteUser = async (id: string): Promise<ActionResult> => {
     return { success: false, message: "Failed to delete user" };
   }
 };
+
+export const updateUserRole = async (id: string, role: "USER" | "ADMIN"): Promise<ActionResult> => {
+  try {
+    await db
+      .update(users)
+      .set({ role })
+      .where(eq(users.id, id));
+    return { success: true };
+  } catch (error) {
+    console.error(error);
+    return { success: false, message: "Failed to update user role" };
+  }
+};
